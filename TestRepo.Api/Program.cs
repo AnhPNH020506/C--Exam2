@@ -3,7 +3,7 @@ using TestRepo.Api.Extensions;
 using TestRepo.Api.Middlewares;
 using TestRepo.Repository;
 using JwtService = TestRepo.Service.JwtService;
-
+using CategoryService = TestRepo.Service.Category;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
@@ -21,6 +21,7 @@ builder.Services.AddJwtServices(builder.Configuration);
 builder.Services.AddSwaggerServices();
 
 builder.Services.AddScoped<JwtService.IService, JwtService.Service>();
+builder.Services.AddScoped<CategoryService.IService, CategoryService.Service>();
 
 builder.Services.AddTransient<GlobalExceptionHandlerMiddleware>();
 
