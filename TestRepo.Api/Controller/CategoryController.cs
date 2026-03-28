@@ -38,9 +38,9 @@ namespace TestRepo.Api.Controller;
         return Ok(listResult);
     }
     [HttpGet("{parentId}/childrens")]
-    public async Task<IActionResult> GetCategoriesById(Guid id)
+    public async Task<IActionResult> GetCategoriesById(Guid parentId)
     {
-        var listResult = await _categoryService.GetCategoryById(id);
+        var listResult = await _categoryService.GetCategoryById(parentId);
         return Ok(listResult);
     }
 }
