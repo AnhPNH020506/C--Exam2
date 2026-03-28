@@ -9,23 +9,17 @@ namespace TestRepo.Api.Controller;
 public class SellerController: ControllerBase
 {
     private readonly AppDbContext _dbContext;
-    public SellerController(AppDbContext dbContext)
+    private readonly IService _sellerService;
+    public SellerController(AppDbContext dbContext,  IService sellerService)
     {
         _dbContext = dbContext;
+        _sellerService = sellerService;
     }
 
     [HttpPost("")]
-    public IActionResult CreateSeller([FromBody] Request.CreateSellerRequest request)
+    public async Task<IActionResult> CreateSeller([FromBody] Request.CreateSellerRequest request)
     {
-        var seller = new Seller()
-        {
-            TaxCode = request.TaxCode,
-            CompanyAddress = request.CompanyAddress,
-            CompanyName = request.CompanyName,
-
-        };
-        _dbContext.Add(seller);
-        _dbContext.SaveChanges();
+        var seller = await _sellerService.CreateSeller(request);
         return Ok(seller);
     }
 }
